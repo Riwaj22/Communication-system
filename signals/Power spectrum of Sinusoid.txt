@@ -1,0 +1,22 @@
+
+clc
+clear all
+close all
+
+t=0:0.1:5;
+A=1;
+w=1000;
+T = 2*pi/w;
+x=A*sin(w*t);
+subplot(2,1,1)
+plot(t,x);
+title('Truncated sinusoid')
+xlabel('t')
+ylabel('x')
+X = fft(x)
+S = abs(X).^2/T
+subplot(2,1,2)
+plot(S,'g')
+xlabel('freq')
+ylabel('Power')
+title('Power spectrum of Sinusoid')

@@ -1,0 +1,14 @@
+
+
+t=0:0.1:5;
+A=1;
+f=1000;
+x=A*sin(f*t);
+
+plot(t,x,'g','linewidth',8);
+hold on
+stem(t,x,'r','linewidth',5)
+title('sinusoid')
+xlabel('t')
+ylabel('x')
+legend('CT signal','DT signal')

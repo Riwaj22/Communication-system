@@ -1,0 +1,10 @@
+clear all;
+close all;
+clc;
+
+t=1:0.01:2;
+x=t
+plot(t,x)
+
+
+ 

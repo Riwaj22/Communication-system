@@ -1,0 +1,23 @@
+clc
+clc;
+clear all
+close all
+t = -.5:.01:.5;
+%Truncated gate pulse has ON+OFF period = 1
+%Pulse ON duration is 0.1 centered at t=0
+xT = rectpuls(t,0.1); 
+subplot(2,1,1);
+plot(t,xT,'r','linewidth',4),
+xlabel('time')
+ylabel('Amplitude')
+title('Truncated Gate function')
+X = fft(xT)
+subplot(2,1,2);
+plot(abs(X).^2,'g','linewidth',4 )
+xlabel('Frequency')
+ylabel('Power')
+title('Power spectrum of gate function')
+
+
+        
+
