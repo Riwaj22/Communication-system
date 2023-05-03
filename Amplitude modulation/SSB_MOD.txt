@@ -1,0 +1,60 @@
+clc;
+clear all;
+close all;
+t= 0:.001:1;
+Fm = input('Message freq, Fm=  ')
+Wm = 2*pi*Fm;
+%Message signal is
+Mt = cos(Wm*t);
+subplot(4,1,1)
+plot(Mt,'linewidth',3);
+title('msg signal')
+
+%Hilbert transform of Mt is:
+
+Mcap = cos(Wm*t-.5*pi);
+subplot(4,1,2)
+plot(Mcap,'g','linewidth',3);
+title('HT of Msg')
+
+Fc = input('Carrier freq, Fc=  ')
+
+Wc = 2*pi*Fc;
+
+%Carrier signal is:
+Ct = cos(Wc*t);
+subplot(4,1,3);
+plot(Ct,'c','linewidth',3);
+title ('carier signal')
+
+%Hilbert transform of Ct is:
+Ccap = cos(Wc*t-.5*pi);
+subplot(4,1,4);
+plot(Ccap,'r','linewidth',3);
+title('HT of carrier')
+
+figure;
+
+s1 = Mt.*Ct;
+subplot(3,1,1)
+plot(s1,'r','linewidth',2);
+title('DSB-SC 1')
+
+%output of 2nd DSB-SC modulator is:
+s2 = Mcap.*Ccap;
+subplot(3,1,2)
+plot(s2,'m','linewidth',2);
+%m = magenta
+title('DSB-SC 2')
+
+
+ssb = s1-s2;
+subplot(3,1,3)
+plot(ssb,'k','linewidth',2);
+%k = black
+
+title('SSB-Modulated wave')
+
+
+
+ 
