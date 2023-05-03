@@ -1,0 +1,24 @@
+
+%DSBSC demodulation using synchronous method
+
+clc;
+clear all;
+close all;
+DSBSC_Mod %calling modulator program named DSBSC_Mod(written earlier)
+v = s.*Ct;
+tau = 1/(2*pi*Fm);%Time constant of LPF
+h = (1/tau)*exp(-t/tau);%Impulse response of LPF
+v0 = conv(v,h);%Final detected output 
+figure('Name','impulse response  of LPF i.e h(t)');
+plot(h,'m','linewidth',3)
+title('impulse response');
+xlabel('time'); ylabel('h(t)');
+figure('Name','Msg signals Transmitted and Received');
+subplot(2,1,1);
+plot(t, Mt,'k','linewidth',3)
+title('TRANSMITTED MESSAGE')
+xlabel('time'); ylabel('amplitude');
+subplot(2,1,2);
+plot(v0,'r','linewidth',3)
+title('Received Message')
+xlabel('time'); ylabel('amplitude');

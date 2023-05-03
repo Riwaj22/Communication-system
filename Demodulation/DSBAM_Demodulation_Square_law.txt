@@ -1,0 +1,23 @@
+
+%DSBTC AM demodulation using square law detector
+clc
+clear all;
+close all;
+Am_Mod %calling modulator program named Am_Mod(written earlier)
+v0 = 2*s + 5*s.*s; %O/P of non-linear device a1= 2, a2 = 5
+tau = 1/(2*pi*Fm);%Time constant of LPF
+h = (1/tau)*exp(-t/tau);%Impulse response of LPF
+Vout = conv(v0,h);%Final detected output 
+figure('Name','impulse response  of LPF i.e h(t)');
+plot(h,'m','linewidth',3)
+title('impulse response');
+xlabel('time'); ylabel('h(t)');
+figure('Name','Msg signals Transmitted and Received');
+subplot(2,1,1);
+plot(t, Mt,'k','linewidth',3)
+title('TRANSMITTED MESSAGE')
+xlabel('time'); ylabel('amplitude');
+subplot(2,1,2);
+plot(Vout,'r','linewidth',3)
+title('Received Message')
+xlabel('time'); ylabel('amplitude');
