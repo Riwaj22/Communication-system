@@ -1,0 +1,54 @@
+clc
+clear all
+close all
+t=[0:0.01:1]   
+m=sinc(2*pi*t) %genrates the sinc function
+subplot(211)
+hold on   
+plot(m,'--magenta','linewidth',2) %plotting the sinc pulse
+title('sinc pulse') 
+xlabel('time')
+ylabel('amplitude')
+
+del = .15; %user-defined step size
+
+for n=1:101 %101 values of t hence, 101 samples of m
+    if n==1
+        e(n)=m(n); %start staircase approximation at first msg amplitude
+        eq(n)=del*sign(e(n));
+        mq(n)=eq(n);
+    else
+        e(n)=m(n)-mq(n-1);%e(n) will be +ve if msg is rising
+        eq(n)=del*sign(e(n));%sign(e(n)) = +1 if msg is rising
+        mq(n)=mq(n-1)+eq(n);
+    end
+end
+
+%draw the quantized version of the signal on the graph of original signal
+stairs(mq,'green','linewidth',2)
+hleg=legend('original signal(sinc function)','stair case approximated signal')
+hold off
+
+%Deltma Modulation of Sine wave
+subplot(212)
+hold on
+m1=sin(2*pi*t)
+plot(m1,'cyan','linewidth',2)
+title('sin wave')
+xlabel('time')
+ylabel('amplitude')
+
+for n=1:1:100
+    if n==1
+        e1(n)=m1(n);
+        eq1(n)=del*sign(e1(n));
+        mq1(n)=eq1(n)
+    else
+        e1(n)=m1(n)-mq1(n-1);
+        eq1(n)=del*sign(e1(n));
+        mq1(n)=mq1(n-1)+eq1(n);
+    end
+end
+stairs(mq1,'red','linewidth',2)
+hleg=legend('original signal','stair case approximated signal')
+
